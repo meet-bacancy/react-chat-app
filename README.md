@@ -1,4 +1,4 @@
-# React Boilerplate based on Create React App
+# React Chat App
 
 ### `Features:`
 1) Eslint, prettier and stylelint setup 
