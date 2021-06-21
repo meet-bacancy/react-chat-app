@@ -9,7 +9,7 @@ const AuthContext = React.createContext({
 
 export const AuthProvider = (props) => {
   const user = getItemFromStorage('user');
-  const [isloggedIn, setIsLoggedIn] = useState(!!(user && user.email));
+  const [isloggedIn, setIsLoggedIn] = useState(!!(user && user.name));
 
   const login = () => setIsLoggedIn(true);
   const logout = () => setIsLoggedIn(false);
