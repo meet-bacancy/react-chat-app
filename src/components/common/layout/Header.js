@@ -13,13 +13,17 @@ import {
   DropdownItem,
   Label,
   Button,
+  UncontrolledTooltip,
 } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import {
   getItemFromStorage,
   removeItemFromStorage,
 } from '../../../utils/helper';
 import { useAuth } from '../../../hooks/useAuth';
 import logo from '../../../assets/images/logo.svg';
+import { toastError, toastSuccess } from '../../notifications';
 
 const Header = ({ roomId }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,12 +57,19 @@ const Header = ({ roomId }) => {
           className="text-white align-items-center mb-2"
           onClick={() => {
             navigator.clipboard.writeText(roomId).then(
-              () => {},
-              () => {},
+              () => {
+                toastSuccess('Room-Id copied.');
+              },
+              () => {
+                toastError('Something went wrong.');
+              },
             );
           }}
         >
-          Copy Room-id
+          <FontAwesomeIcon icon={faCopy} id="copy-room-id" />
+          <UncontrolledTooltip placement="right" target="copy-room-id">
+            Copy Room-Id
+          </UncontrolledTooltip>
         </Button>
       </div>
       <NavbarToggler onClick={toggle} />
@@ -66,8 +77,8 @@ const Header = ({ roomId }) => {
         <Nav className="ml-auto" navbar>
           <UncontrolledDropdown nav inNavbar>
             <DropdownToggle nav caret>
-              {userFromStorage && userFromStorage.email
-                ? userFromStorage.email
+              {userFromStorage && userFromStorage.name
+                ? userFromStorage.name
                 : 'user'}
             </DropdownToggle>
             <DropdownMenu right>
