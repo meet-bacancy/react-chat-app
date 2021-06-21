@@ -19,28 +19,21 @@ import {
   Spinner,
   InputGroup,
 } from 'reactstrap';
-import { useAuth } from '../hooks/useAuth';
-import { setItemInStorage } from '../utils/helper';
+import { getItemFromStorage } from '../utils/helper';
 import { getCreateRoom } from '../services/api';
 import { DEFAULT_ROOM_TYPE, ROOM_TYPE } from '../utils/constants';
 import { toastError, toastSuccess } from '../components/notifications';
 
-const Login = () => {
-  const [userName, setUserName] = useState('');
+const CreateRoom = () => {
+  const { name } = getItemFromStorage('user');
   const [roomId, setRoomId] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [roomType, setRoomType] = useState(DEFAULT_ROOM_TYPE);
   const [isLoading, setLoading] = useState(false);
 
   const history = useHistory();
-  const auth = useAuth();
-
   const handleOnJoinRoom = () => {
     if (roomId.trim().length > 0) {
-      auth.login();
-      setItemInStorage('user', {
-        name: userName,
-      });
       history.push(`/${roomId}`);
     }
   };
@@ -54,10 +47,6 @@ const Login = () => {
         .then((res) => {
           setLoading(false);
           if (res && res.roomUrl) {
-            auth.login();
-            setItemInStorage('user', {
-              name: userName,
-            });
             history.push(`/${res.roomUrl}`);
           }
         })
@@ -81,18 +70,7 @@ const Login = () => {
                 React Chat App
               </CardTitle>
               <Form onSubmit={onLoginClick}>
-                <FormGroup>
-                  <Label for="email">Name</Label>
-                  <Input
-                    type="text"
-                    name="email"
-                    id="email"
-                    placeholder="Enter your name"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                    required
-                  />
-                </FormGroup>
+                <h5>{`Welcome, ${name}`}</h5>
                 <>
                   {roomType === ROOM_TYPE.joinRoom ? (
                     <FormGroup>
@@ -152,4 +130,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default CreateRoom;

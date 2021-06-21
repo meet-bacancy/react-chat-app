@@ -19,6 +19,12 @@ const MessageBar = () => {
     setValue(e.target.value);
   };
 
+  const handleKeyUp = (e) => {
+    if ((e.key === 'Enter' || e.keyCode === 13) && value.trim().length > 0) {
+      handleSubmit(value);
+    }
+  };
+
   return (
     <div className="w-50 message-bar d-flex">
       <input
@@ -26,6 +32,7 @@ const MessageBar = () => {
         className="form-control"
         value={value}
         onChange={handleChange}
+        onKeyUp={handleKeyUp}
         placeholder="Type a message here then hit ENTER"
         required
       />
@@ -35,7 +42,7 @@ const MessageBar = () => {
         disabled={!value.trim().length}
         onClick={() => handleSubmit(value)}
       >
-        <FontAwesomeIcon icon={faPaperPlane} className="rotate-45" />
+        <FontAwesomeIcon icon={faPaperPlane} />
       </Button>
     </div>
   );

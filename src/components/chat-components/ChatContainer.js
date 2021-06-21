@@ -1,11 +1,17 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-indent */
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { getItemFromStorage } from '../../utils/helper';
 
 const ChatContainer = ({ messages }) => {
   const { name } = getItemFromStorage('user');
+  const messagesEnd = useRef(null);
+
+  useEffect(() => {
+    messagesEnd.current.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
   return (
     <>
       {messages && messages.length
@@ -25,6 +31,7 @@ const ChatContainer = ({ messages }) => {
             </div>
           ))
         : null}
+      <div style={{ float: 'left', clear: 'both' }} ref={messagesEnd} />
     </>
   );
 };
