@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Collapse,
   Navbar,
@@ -11,6 +12,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Label,
+  Button,
 } from 'reactstrap';
 import {
   getItemFromStorage,
@@ -19,7 +21,7 @@ import {
 import { useAuth } from '../../../hooks/useAuth';
 import logo from '../../../assets/images/logo.svg';
 
-const Header = () => {
+const Header = ({ roomId }) => {
   const [isOpen, setIsOpen] = useState(false);
   const userFromStorage = getItemFromStorage('user');
 
@@ -41,9 +43,24 @@ const Header = () => {
         <img src={logo} alt=" React Boilerplate" className="logo" />
         React Chat App
       </NavbarBrand>
-      <Label className="text-white align-items-center">
-        Your id: xxxx-xxxx-xxxx-xxxx
-      </Label>
+      <div className="d-flex align-items-center mt-2">
+        <Label className="text-white align-items-center">
+          Room id:
+          {` ${roomId}`}
+        </Label>
+        <Button
+          color="link"
+          className="text-white align-items-center mb-2"
+          onClick={() => {
+            navigator.clipboard.writeText(roomId).then(
+              () => {},
+              () => {},
+            );
+          }}
+        >
+          Copy Room-id
+        </Button>
+      </div>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto" navbar>
@@ -61,6 +78,10 @@ const Header = () => {
       </Collapse>
     </Navbar>
   );
+};
+
+Header.propTypes = {
+  roomId: PropTypes.string.isRequired,
 };
 
 export default Header;
