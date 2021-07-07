@@ -37,7 +37,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/.",
-    "lint:fix": "eslint --fix src/.",
+    "lint:fix": "eslint --fix server/.",
     "lint:scss": "stylelint 'src/**/*.scss' --syntax scss",
     "lint:scss-fix": "stylelint 'src/**/*.scss' --syntax scss --fix",
     "format": "prettier --write \"**/*.+(js|jsx|json)\" "
