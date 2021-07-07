@@ -12,11 +12,11 @@ const DashBoard = (props) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    socket.emit('room', params.roomId);
+    socket.emit('JOIN_ROOM', params.roomId);
   }, [params.roomId]);
 
   useEffect(() => {
-    socket.on('chat message', (message) => {
+    socket.on('RECEIVE_MSG', (message) => {
       setMessages((prevState) => [...prevState, message]);
     });
   }, []);

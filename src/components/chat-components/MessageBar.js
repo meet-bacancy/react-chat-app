@@ -12,7 +12,7 @@ const MessageBar = () => {
 
   const handleSubmit = (msg) => {
     setValue('');
-    socket.emit('chat message', { userName: name, msg });
+    socket.emit('SEND_MSG', { userName: name, msg });
   };
 
   const handleChange = (e) => {
