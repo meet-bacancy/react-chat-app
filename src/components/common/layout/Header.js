@@ -45,7 +45,7 @@ const Header = ({ roomId }) => {
         href="/"
       >
         <img src={logo} alt=" React Boilerplate" className="logo" />
-        React Chat App
+        Chat Application Demo
       </NavbarBrand>
       <div className="d-flex align-items-center mt-2">
         <Label className="text-white align-items-center">

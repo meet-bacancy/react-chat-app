@@ -68,7 +68,7 @@ const CreateRoom = () => {
             <Card>
               <CardBody>
                 <CardTitle tag="h3" className="text-center mb-5">
-                  React Chat App
+                  Chat Application Demo
                 </CardTitle>
                 <Form onSubmit={onLoginClick}>
                   <h5>{`Welcome, ${user.name}`}</h5>
