@@ -1,5 +1,6 @@
 import socketIOClient from 'socket.io-client';
 
+// socketIOClient is used in front-end to connect with socket backend url
 export const socket = socketIOClient(process.env.REACT_APP_SOCKET_URL, {
   transports: ['websocket'],
   reconnectionAttempts: 20,

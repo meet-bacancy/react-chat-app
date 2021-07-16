@@ -12,11 +12,21 @@ const DashBoard = (props) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
+    // Trigger JOIN_ROOM with unique room ID
+
+    // EMIT
+    // The Socket.IO API is inspired from the Node.js EventEmitter, 
+    // which means you can emit events on one side and register listeners on the other: 
+    // server-side- io.on("connection", (socket) => { socket.emit("hello", "world");
+
     socket.emit('JOIN_ROOM', params.roomId);
   }, [params.roomId]);
 
   useEffect(() => {
-    socket.on('RECEIVE_MSG', (message) => {
+    // Trigger 'NEW_MESSAGE' event
+    // Message recieved in the event NEW_MESSAGE
+
+    socket.on('NEW_MESSAGE', (message) => {
       setMessages((prevState) => [...prevState, message]);
     });
   }, []);

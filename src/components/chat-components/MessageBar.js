@@ -1,6 +1,5 @@
 import { Button } from 'reactstrap';
 import React, { useState } from 'react';
-// import { Picker } from 'emoji-mart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { getItemFromStorage, socket } from '../../utils/helper';
@@ -8,11 +7,14 @@ import { getItemFromStorage, socket } from '../../utils/helper';
 const MessageBar = () => {
   const [value, setValue] = useState('');
   const { name } = getItemFromStorage('user');
-  // const [shouldShowEmoji, setShowEmoji] = useState(false);
 
+  // On Submitting the message/form
   const handleSubmit = (msg) => {
     setValue('');
-    socket.emit('SEND_MSG', { userName: name, msg });
+    
+    // Trigger NEW_MESSAGE with object
+    // this object contains userName, msg
+    socket.emit('NEW_MESSAGE', { userName: name, msg });
   };
 
   const handleChange = (e) => {
@@ -49,22 +51,4 @@ const MessageBar = () => {
 };
 
 export default MessageBar;
-/* {shouldShowEmoji ? (
-        <span>
-          <Picker onSelect={addEmoji} />
-        </span>
-      ) : (
-        <FontAwesomeIcon
-          className="far icon mt-2 ml-2"
-          icon={faSmileBeam}
-          onClickCapture={() => setShowEmoji(true)}
-        />
-      )} */
 
-// const addEmoji = (e) => {
-//   const sym = e.unified.split('-');
-//   const codesArray = [];
-//   sym.forEach((el) => codesArray.push(`0x${el}`));
-//   const emoji = String.fromCodePoint(...codesArray);
-//   setValue(`${value}${emoji}`);
-// };

@@ -7,7 +7,11 @@ const cors = require('cors');
 const socketIO = require('socket.io');
 
 const app = express();
+
+// creating http server
 const server = http.createServer(app);
+
+// creating socket object
 const io = socketIO(server);
 
 const adminRoutes = require('./routes/admin');
@@ -28,26 +32,41 @@ app.use(errorController.get404);
 const activeUsers = new Set();
 let roomId = '';
 
+// Creating connection for socket
+
+// A socket is one endpoint of a two-way communication 
+// link between two programs running on the network.
+// ... An endpoint is a combination of an IP address and a port number.
+
 io.on('connection', (socket) => {
   socket.on('JOIN_ROOM', (room) => {
     roomId = room;
     socket.join(room);
   });
 
-  socket.on('SEND_MSG', (msg) => {
-    io.to(roomId).emit('RECEIVE_MSG', msg);
+  // To emit an event from your client, use the emit function on 
+  // the socket object
+  // To handle these events, use the on function on the socket 
+  // object on your server.
+  // Sent an event from the client!
+
+  // Creating event NEW_MESSAGE for sending the message
+  // NEW_MESSAGE will be used in front-end to send msgs
+
+  socket.on('NEW_MESSAGE', (msg) => {
+    io.to(roomId).emit('NEW_MESSAGE', msg);
   });
 
-  socket.on('TYPING', (data) => {
-    socket.broadcast.to(roomId).emit('TYPING', data);
-  });
-
+  // To disconnect participant from chat
+  // It will also remove specific user from object
   socket.on('disconnect', () => {
     activeUsers.delete(socket.userId);
+
+    // Triggering the event user disconnects
     io.to(roomId).emit('user disconnected', socket.userId);
   });
 });
 
 const PORT = process.env.PORT || 3000;
-console.log('Server listing on PORT: ', PORT);
+console.log('Server listening on PORT: ', PORT);
 server.listen(PORT);
