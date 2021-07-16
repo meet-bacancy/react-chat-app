@@ -11,7 +11,7 @@ const MessageBar = () => {
   // On Submitting the message/form
   const handleSubmit = (msg) => {
     setValue('');
-    
+
     // Trigger NEW_MESSAGE with object
     // this object contains userName, msg
     socket.emit('NEW_MESSAGE', { userName: name, msg });
@@ -51,4 +51,3 @@ const MessageBar = () => {
 };
 
 export default MessageBar;
-

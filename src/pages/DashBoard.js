@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React, { useEffect, useState } from 'react';
@@ -15,8 +16,8 @@ const DashBoard = (props) => {
     // Trigger JOIN_ROOM with unique room ID
 
     // EMIT
-    // The Socket.IO API is inspired from the Node.js EventEmitter, 
-    // which means you can emit events on one side and register listeners on the other: 
+    // The Socket.IO API is inspired from the Node.js EventEmitter,
+    // which means you can emit events on one side and register listeners on the other:
     // server-side- io.on("connection", (socket) => { socket.emit("hello", "world");
 
     socket.emit('JOIN_ROOM', params.roomId);

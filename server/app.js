@@ -1,3 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-console */
+
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -34,7 +37,7 @@ let roomId = '';
 
 // Creating connection for socket
 
-// A socket is one endpoint of a two-way communication 
+// A socket is one endpoint of a two-way communication
 // link between two programs running on the network.
 // ... An endpoint is a combination of an IP address and a port number.
 
@@ -44,9 +47,9 @@ io.on('connection', (socket) => {
     socket.join(room);
   });
 
-  // To emit an event from your client, use the emit function on 
+  // To emit an event from your client, use the emit function on
   // the socket object
-  // To handle these events, use the on function on the socket 
+  // To handle these events, use the on function on the socket
   // object on your server.
   // Sent an event from the client!
 
