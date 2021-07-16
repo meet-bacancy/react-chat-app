@@ -42,10 +42,10 @@ const CreateRoom = () => {
     e.preventDefault();
     if (roomType === ROOM_TYPE.createRoom) {
       setLoading(true);
-      toastSuccess('Room created!!');
       getCreateRoom()
         .then((res) => {
           setLoading(false);
+          toastSuccess('Room created!!');
           if (res && res.roomUrl) {
             history.push(`/${res.roomUrl}`);
           }
