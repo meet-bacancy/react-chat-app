@@ -25,7 +25,7 @@ const DashBoard = (props) => {
 
   useEffect(() => {
     // Trigger 'NEW_MESSAGE' event
-    // Message recieved in the event NEW_MESSAGE
+    // Message received in the event NEW_MESSAGE
 
     socket.on('NEW_MESSAGE', (message) => {
       setMessages((prevState) => [...prevState, message]);
